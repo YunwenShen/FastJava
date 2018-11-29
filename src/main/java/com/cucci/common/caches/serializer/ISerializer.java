@@ -3,7 +3,7 @@ package com.cucci.common.caches.serializer;
 /**
  * 自定义序列化接口
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 public interface ISerializer {
 

@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * JDK序列化和反序列化对象
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 public class JdkSerializer implements ISerializer {
 
