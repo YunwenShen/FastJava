@@ -9,10 +9,15 @@ import java.util.Date;
 /**
  * 操作日志
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 @Data
-public class Log implements Serializable {
+public class OperateLog implements Serializable {
+
+    /**
+     * 不记录操作日志
+     */
+    public static final OperateLog NOT_LOGGED = notLogged();
 
     /**
      * 操作人
@@ -44,6 +49,11 @@ public class Log implements Serializable {
      */
     private String content;
 
+    /**
+     * 是否记录日志
+     */
+    private boolean record = true;
+
 
     /**
      * 构造器
@@ -55,7 +65,7 @@ public class Log implements Serializable {
      * @param relatedId   关联id
      * @param content     操作内容
      */
-    public Log(Integer id, Date operateTime, OperateType operateType, String relatedName, Integer relatedId, String content) {
+    public OperateLog(Integer id, Date operateTime, OperateType operateType, String relatedName, Integer relatedId, String content) {
         this.id = id;
         this.operateTime = operateTime;
         this.operateType = operateType;
@@ -72,8 +82,8 @@ public class Log implements Serializable {
      * @param relatedId   关联对象id
      * @return log
      */
-    public static Log genCreateLog(Integer id, String relatedName, Integer relatedId) {
-        return new Log(id, new Date(), OperateType.CREATE, relatedName, relatedId, null);
+    public static OperateLog genCreateLog(Integer id, String relatedName, Integer relatedId) {
+        return new OperateLog(id, new Date(), OperateType.CREATE, relatedName, relatedId, null);
     }
 
     /**
@@ -83,10 +93,10 @@ public class Log implements Serializable {
      * @param relatedName 关联对象
      * @param relatedId   关联对象id
      * @param content     修改内容
-     * @return log
+     * @return logs
      */
-    public static Log genUpdateLog(Integer id, String relatedName, Integer relatedId, String content) {
-        return new Log(id, new Date(), OperateType.UPDATE, relatedName, relatedId, content);
+    public static OperateLog genUpdateLog(Integer id, String relatedName, Integer relatedId, String content) {
+        return new OperateLog(id, new Date(), OperateType.UPDATE, relatedName, relatedId, content);
     }
 
     /**
@@ -97,7 +107,13 @@ public class Log implements Serializable {
      * @param relatedId   关联对象id
      * @return log
      */
-    public static Log genDeleteLog(Integer id, String relatedName, Integer relatedId) {
-        return new Log(id, new Date(), OperateType.DELETE, relatedName, relatedId, null);
+    public static OperateLog genDeleteLog(Integer id, String relatedName, Integer relatedId) {
+        return new OperateLog(id, new Date(), OperateType.DELETE, relatedName, relatedId, null);
+    }
+
+    private static OperateLog notLogged() {
+        OperateLog notLogged = new OperateLog(null, null, null, null, null, null);
+        notLogged.setRecord(false);
+        return notLogged;
     }
 }

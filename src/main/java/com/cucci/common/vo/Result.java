@@ -28,10 +28,16 @@ public class Result implements Serializable {
      */
     public Object data;
 
-    private Result(ResultCode resultCode, String message, Object data) {
+    /**
+     * 操作日志
+     */
+    public OperateLog log;
+
+    private Result(ResultCode resultCode, String message, Object data, OperateLog log) {
         this.code = resultCode.getCode();
         this.message = message;
         this.data = data;
+        this.log = log;
     }
 
     /**
@@ -41,19 +47,41 @@ public class Result implements Serializable {
      * @return result
      */
     public static Result createError(String message) {
-        return new Result(ResultCode.ERROR, message, null);
+        return new Result(ResultCode.ERROR, message, null, OperateLog.NOT_LOGGED);
     }
-
 
     /**
      * 构建成功的返回结果
      *
      * @param message 信息
      * @param data    返回数据
+     * @param log     操作日志
+     * @return result
+     */
+    public static Result createSuccess(String message, Object data, OperateLog log) {
+        return new Result(ResultCode.SUCCESS, message, data, log);
+    }
+
+    /**
+     * 构建成功的返回结果
+     *
+     * @param message 西悉尼
+     * @param data    返回数据
      * @return result
      */
     public static Result createSuccess(String message, Object data) {
-        return new Result(ResultCode.SUCCESS, message, data);
+        return new Result(ResultCode.SUCCESS, message, data, OperateLog.NOT_LOGGED);
+    }
+
+    /**
+     * 构建成功的返回结果
+     *
+     * @param message 信息
+     * @param log     操作日志
+     * @return result
+     */
+    public static Result createSuccess(String message, OperateLog log) {
+        return new Result(ResultCode.SUCCESS, message, null, log);
     }
 
     /**
@@ -63,7 +91,7 @@ public class Result implements Serializable {
      * @return result
      */
     public static Result createSuccess(String message) {
-        return new Result(ResultCode.SUCCESS, message, null);
+        return new Result(ResultCode.SUCCESS, message, null, OperateLog.NOT_LOGGED);
     }
 
     @Override
