@@ -65,6 +65,14 @@ public interface ICacheService {
      */
     Long incr(final String type, final String key);
 
+    /**
+     * 为缓存设置过期时间
+     *
+     * @param type    缓存分类
+     * @param key     缓存key
+     * @param seconds 过期时间
+     * @return 返回1表示设置成功，返回0表示key不存在（低于 Redis2.1.3对于过期的Key不会更新过期时间）
+     */
     Long expire(final String type, final String key, final int seconds);
 
 }
