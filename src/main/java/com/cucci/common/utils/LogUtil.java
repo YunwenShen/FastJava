@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
 /**
  * 操作日志工具类
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 public class LogUtil {
 
