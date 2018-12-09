@@ -47,7 +47,7 @@ public class Result implements Serializable {
      * @return result
      */
     public static Result createError(String message) {
-        return new Result(ResultCode.ERROR, message, null, OperateLog.NOT_LOGGED);
+        return new Result(ResultCode.ERROR, message, null, null);
     }
 
     /**
