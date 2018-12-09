@@ -3,7 +3,7 @@ package com.cucci.common.enums;
 /**
  * 日志操作类型
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 public enum OperateType {
     CREATE(1, "新增"),
