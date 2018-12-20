@@ -2,16 +2,15 @@ package com.cucci.common.base;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * 表单基类
  *
  * @author shenyw
  **/
 @Data
-public class BaseForm implements Serializable {
+public class BaseQueryForm implements QueryForm {
 
+    private static final long serialVersionUID = -8753593462701650513L;
     /**
      * 页码
      **/
