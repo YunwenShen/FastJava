@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 /**
  * 首页接口实现类
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 
 @Service
