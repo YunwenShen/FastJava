@@ -13,6 +13,7 @@ import java.io.Serializable;
 @Data
 public class Result implements Serializable {
 
+    private static final long serialVersionUID = 8936291267036437712L;
     /**
      * 状态码
      */
@@ -21,7 +22,7 @@ public class Result implements Serializable {
     /**
      * 返回提示消息
      */
-    public String message;
+    public String msg;
 
     /**
      * 返回数据
@@ -35,7 +36,7 @@ public class Result implements Serializable {
 
     private Result(ResultCode resultCode, String message, Object data, OperateLog log) {
         this.code = resultCode.getCode();
-        this.message = message;
+        this.msg = message;
         this.data = data;
         this.log = log;
     }
@@ -98,7 +99,7 @@ public class Result implements Serializable {
     public String toString() {
         return "{" +
                 "code=" + code +
-                ", message='" + message + '\'' +
+                ", msg='" + msg + '\'' +
                 ", data=" + data +
                 '}';
     }
