@@ -26,3 +26,5 @@
 /.mvn/
 /mvnw.cmd
 /mvnw
+/lib/
+/logs/
