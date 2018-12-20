@@ -5,7 +5,7 @@ import com.cucci.common.vo.Result;
 /**
  * 首页接口
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 public interface IndexService {
 
