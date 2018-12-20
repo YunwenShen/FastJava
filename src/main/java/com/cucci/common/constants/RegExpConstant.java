@@ -3,7 +3,7 @@ package com.cucci.common.constants;
 /**
  * 正则表达式常量
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 public final class RegExpConstant {
 
