@@ -1,6 +1,7 @@
 package com.cucci.common.interceptors;
 
 import com.cucci.common.annotions.Login;
+import com.cucci.common.entity.User;
 import com.cucci.common.vo.Result;
 import org.springframework.stereotype.Service;
 import org.springframework.web.method.HandlerMethod;
@@ -31,7 +32,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         }
         // 更新session时长
         if (isPass) {
-
+            // 将登陆用户绑定到RequestContextHolder中可以直接在Service层获取登陆用户
+            request.getSession().setAttribute("curUser", new User());
         } else {
             response.setContentType("text/html;charset=UTF-8");
             try (PrintWriter out = response.getWriter()) {
