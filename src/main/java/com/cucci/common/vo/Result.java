@@ -3,7 +3,7 @@ package com.cucci.common.vo;
 import com.cucci.common.enums.ResultCode;
 import lombok.Data;
 
-import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * 返回前端结果
@@ -11,34 +11,19 @@ import java.io.Serializable;
  * @author shenyw
  **/
 @Data
-public class Result implements Serializable {
+public class Result extends HashMap<String, Object> {
 
     private static final long serialVersionUID = 8936291267036437712L;
-    /**
-     * 状态码
-     */
-    public int code;
-
-    /**
-     * 返回提示消息
-     */
-    public String msg;
-
-    /**
-     * 返回数据
-     */
-    public Object data;
-
-    /**
-     * 操作日志
-     */
-    public OperateLog log;
 
     private Result(ResultCode resultCode, String message, Object data, OperateLog log) {
-        this.code = resultCode.getCode();
-        this.msg = message;
-        this.data = data;
-        this.log = log;
+        put("code", resultCode.getCode());
+        put("msg", message);
+        if (data != null) {
+            put("data", data);
+        }
+        if (log != null) {
+            put("log", log);
+        }
     }
 
     /**
@@ -71,7 +56,7 @@ public class Result implements Serializable {
      * @return result
      */
     public static Result createSuccess(String message, Object data) {
-        return new Result(ResultCode.SUCCESS, message, data, OperateLog.NOT_LOGGED);
+        return new Result(ResultCode.SUCCESS, message, data, null);
     }
 
     /**
@@ -92,15 +77,7 @@ public class Result implements Serializable {
      * @return result
      */
     public static Result createSuccess(String message) {
-        return new Result(ResultCode.SUCCESS, message, null, OperateLog.NOT_LOGGED);
+        return new Result(ResultCode.SUCCESS, message, null, null);
     }
 
-    @Override
-    public String toString() {
-        return "{" +
-                "code=" + code +
-                ", msg='" + msg + '\'' +
-                ", data=" + data +
-                '}';
-    }
 }

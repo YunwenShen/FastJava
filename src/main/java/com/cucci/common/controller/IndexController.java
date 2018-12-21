@@ -1,6 +1,5 @@
 package com.cucci.common.controller;
 
-import com.cucci.common.annotions.Login;
 import com.cucci.common.base.BaseController;
 import com.cucci.common.form.UserSaveForm;
 import com.cucci.common.service.IndexService;
@@ -39,7 +38,6 @@ public class IndexController extends BaseController {
      * @param password
      * @return
      */
-    @Login
     @ApiOperation(value = "用户登陆", notes = "用户登陆")
     @PostMapping("/login")
     public Result login(@RequestParam("userName") String userName,

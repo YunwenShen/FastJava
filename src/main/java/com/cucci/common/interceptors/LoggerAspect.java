@@ -36,10 +36,12 @@ public class LoggerAspect {
             if (result == null) {
                 throw new RuntimeException("返回值不能为空");
             }
-            if (result.getLog() == null) {
+            if (result.get("log") == null) {
                 logger.warn("该操作没有输出操作日志");
+            } else {
+                // TODO 可以将操作日志存储到数据库中
+                result.remove("log");
             }
-            // TODO 可以将操作日志存储到数据中
             return result;
         } catch (Throwable e) {
             logger.error(
