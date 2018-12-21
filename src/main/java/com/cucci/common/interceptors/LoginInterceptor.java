@@ -26,7 +26,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         if (login == null) {
             String userName = request.getHeader("userName");
             String password = request.getHeader("password");
-            if (!(userName.equals("test") && password.equals("123456"))) {
+            if (!("test".equals(userName) && "123456".equals(password))) {
                 isPass = false;
             }
         }
