@@ -11,6 +11,9 @@ import java.nio.charset.Charset;
  **/
 public class CacheUtils {
 
+    private CacheUtils() {
+    }
+
     /**
      * 拼接缓存key
      *
