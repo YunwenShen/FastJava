@@ -19,10 +19,6 @@ public enum ResultCode {
         return code;
     }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
-
     ResultCode(int code) {
         this.code = code;
     }
