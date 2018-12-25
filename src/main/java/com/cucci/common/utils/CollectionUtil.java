@@ -10,6 +10,9 @@ import java.util.List;
  **/
 public class CollectionUtil {
 
+    private CollectionUtil() {
+    }
+
     /**
      * 深拷贝
      *
@@ -20,6 +23,9 @@ public class CollectionUtil {
      * @throws ClassNotFoundException
      */
     public static <T> T deepCopy(List<T> list) throws IOException, ClassNotFoundException {
+        if (!(list instanceof Serializable)) {
+            throw new IllegalArgumentException("args must be serializable");
+        }
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
         objectOutputStream.writeObject(list);

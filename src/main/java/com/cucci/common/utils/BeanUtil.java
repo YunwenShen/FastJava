@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
  *
  * @author shenyw
  **/
-public class LogUtil {
+public class BeanUtil {
 
     public static boolean contain(String[] ignoreFields, String field) {
         if (ignoreFields.length == 0) {
@@ -39,10 +39,8 @@ public class LogUtil {
             Object beforeValue = field.get(before);
             Object afterValue = field.get(after);
             String fieldName = field.getName();
-            if (beforeValue != null && afterValue != null) {
-                if (!beforeValue.equals(afterValue) && contain(ignoreFields, fieldName)) {
-                    sb.append(field.getName()).append(":").append(beforeValue).append("->").append(afterValue).append("\n");
-                }
+            if (beforeValue != null && afterValue != null && !beforeValue.equals(afterValue) && contain(ignoreFields, fieldName)) {
+                sb.append(field.getName()).append(":").append(beforeValue).append("->").append(afterValue).append("\n");
             }
         }
         return sb.toString();

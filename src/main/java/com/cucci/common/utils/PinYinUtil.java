@@ -17,6 +17,9 @@ import java.util.List;
  */
 public class PinYinUtil {
 
+    private PinYinUtil() {
+    }
+
     /**
      * 得到单个字符的pinYin形式
      *
@@ -96,12 +99,6 @@ public class PinYinUtil {
         return result.toString();
     }
 
-    /**
-     * 得到单个字符的pingyin形式
-     *
-     * @param c
-     * @return
-     */
     public static List<String> getFirstSpell(char c) {
         List<String> list = new ArrayList<String>();
         HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();

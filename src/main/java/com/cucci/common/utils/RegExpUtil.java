@@ -12,6 +12,9 @@ import java.util.regex.Pattern;
  **/
 public class RegExpUtil {
 
+    private RegExpUtil() {
+    }
+
     /**
      * 通过正则解析内容
      *

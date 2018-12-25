@@ -27,8 +27,8 @@ public class EmailUtil {
         Authenticator authenticator = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                String userName = props.getProperty("mail.user");
-                String password = props.getProperty("mail.password");
+                String userName = emailEntity.getFrom();
+                String password = emailEntity.getPassword();
                 return new PasswordAuthentication(userName, password);
             }
         };
@@ -37,7 +37,7 @@ public class EmailUtil {
         // 创建邮件消息
         MimeMessage message = new MimeMessage(mailSession);
         // 设置发件人
-        InternetAddress form = new InternetAddress(props.getProperty("mail.user"));
+        InternetAddress form = new InternetAddress(emailEntity.getFrom());
         message.setFrom(form);
         // 设置收件人
         InternetAddress to = new InternetAddress(emailEntity.getTo());

@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
  **/
 public class UserUtil {
 
+    private UserUtil() {
+    }
+
     /**
      * 通过在拦截器中设置的数据获取当前登陆用户
      *
