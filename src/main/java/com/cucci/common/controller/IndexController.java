@@ -18,12 +18,17 @@ import javax.annotation.Resource;
  **/
 @Controller
 @ResponseBody
-@Api(description = "首页")
+@Api(value = "首页")
 public class IndexController extends BaseController {
 
     @Resource
     private IndexService indexService;
 
+    /**
+     * 测试日志拦截器
+     *
+     * @return Result
+     */
     @ApiOperation(value = "测试拦截器日志", notes = "拦截器日志")
     @GetMapping({"/index", "/"})
     public Result index() {
@@ -34,9 +39,9 @@ public class IndexController extends BaseController {
     /**
      * 测试登陆拦截器
      *
-     * @param userName
-     * @param password
-     * @return
+     * @param userName 用户名
+     * @param password 密码
+     * @return Result
      */
     @ApiOperation(value = "用户登陆", notes = "用户登陆")
     @PostMapping("/login")
@@ -49,13 +54,12 @@ public class IndexController extends BaseController {
     /**
      * 测试BeanValidate
      *
-     * @param form
-     * @return
+     * @param form 用户保存表单
+     * @return Result
      */
     @ApiOperation(value = "测试BeanValidate", notes = "测试表单验证")
     @PostMapping("/save")
     public Result saveUser(@RequestBody UserSaveForm form) {
-        System.out.println(form.toString());
         return Result.createSuccess("保存成功");
     }
 
