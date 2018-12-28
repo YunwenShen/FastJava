@@ -1,6 +1,5 @@
 package com.cucci.common.utils;
 
-import com.cucci.common.vo.Result;
 import org.springframework.util.Assert;
 
 import java.lang.reflect.Field;
@@ -44,16 +43,5 @@ public class BeanUtil {
             }
         }
         return sb.toString();
-    }
-
-    public static void main(String[] args) {
-        Result result1 = Result.createError("error");
-        Result result2 = Result.createSuccess("success");
-        try {
-            String result = compareEach(result1, new Object(), Object.class);
-            System.out.println(result);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
     }
 }
