@@ -6,22 +6,19 @@ import com.cucci.common.service.IndexService;
 import com.cucci.common.vo.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.stereotype.Controller;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
 
 /**
  * 首页
  *
  * @author shenyw
  **/
-@Controller
-@ResponseBody
+@RestController
 @Api(value = "首页")
+@AllArgsConstructor
 public class IndexController extends BaseController {
 
-    @Resource
     private IndexService indexService;
 
     /**
