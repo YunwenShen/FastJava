@@ -1,7 +1,7 @@
 package com.cucci.common.vo;
 
+import com.alibaba.druid.support.json.JSONUtils;
 import com.cucci.common.enums.ResultCode;
-import lombok.Data;
 
 import java.util.HashMap;
 
@@ -10,7 +10,6 @@ import java.util.HashMap;
  *
  * @author shenyw
  **/
-@Data
 public class Result extends HashMap<String, Object> {
 
     private static final long serialVersionUID = 8936291267036437712L;
@@ -80,4 +79,9 @@ public class Result extends HashMap<String, Object> {
         return new Result(ResultCode.SUCCESS, message, null, null);
     }
 
+
+    @Override
+    public String toString() {
+        return JSONUtils.toJSONString(this);
+    }
 }
