@@ -35,7 +35,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             // 将登陆用户绑定到RequestContextHolder中可以直接在Service层获取登陆用户
             request.getSession().setAttribute("curUser", new User());
         } else {
-            response.setContentType("text/html;charset=UTF-8");
+            response.setContentType("application/json;charset=UTF-8");
             try (PrintWriter out = response.getWriter()) {
                 out.write(Result.createError("登陆失败").toString());
                 out.flush();
