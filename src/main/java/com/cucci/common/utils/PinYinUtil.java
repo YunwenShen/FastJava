@@ -69,9 +69,7 @@ public class PinYinUtil {
             }
             int slength = slist.size();
             strArray[i] = new String[slength];
-            if (slength == 0) {
-                strArray[i][0] = String.valueOf(clist[i]);
-            } else if (slength == 1) {
+            if (slength == 1) {
                 strArray[i][0] = slist.get(0);
             } else {
                 for (int j = 0; j < slist.size(); j++) {
@@ -100,7 +98,7 @@ public class PinYinUtil {
     }
 
     public static List<String> getFirstSpell(char c) {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();
         format.setCaseType(HanyuPinyinCaseType.LOWERCASE);// 小写
         format.setToneType(HanyuPinyinToneType.WITHOUT_TONE);// 没有音调数字
@@ -142,9 +140,7 @@ public class PinYinUtil {
             }
             int slength = slist.size();
             strArray[i] = new String[slength];
-            if (slength == 0) {
-                strArray[i][0] = String.valueOf(clist[i]);
-            } else if (slength == 1) {
+            if (slength == 1) {
                 strArray[i][0] = slist.get(0);
             } else {
                 for (int j = 0; j < slist.size(); j++) {
@@ -156,16 +152,16 @@ public class PinYinUtil {
         //二维数组排列组合
         StringBuilder result = new StringBuilder();
         int max = 1;
-        for (int i = 0; i < strArray.length; i++) {
-            max *= strArray[i].length;
+        for (String[] aStrArray : strArray) {
+            max *= aStrArray.length;
         }
         for (int i = 0; i < max; i++) {
-            String s = "";
+            StringBuilder s = new StringBuilder();
             int temp = 1; // 注意这个temp的用法。
-            for (int j = 0; j < strArray.length; j++) {
-                temp *= strArray[j].length;
-                String tempStr = strArray[j][i / (max / temp) % strArray[j].length];
-                s += tempStr;
+            for (String[] aStrArray : strArray) {
+                temp *= aStrArray.length;
+                String tempStr = aStrArray[i / (max / temp) % aStrArray.length];
+                s.append(tempStr);
             }
             result.append(",").append(s);
         }

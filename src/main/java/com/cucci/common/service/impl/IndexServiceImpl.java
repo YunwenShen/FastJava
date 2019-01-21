@@ -16,6 +16,6 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public Result sayHello() {
-        return null;
+        return Result.createSuccess("hello world");
     }
 }
