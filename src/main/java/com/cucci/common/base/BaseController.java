@@ -1,6 +1,7 @@
 package com.cucci.common.base;
 
 import com.cucci.common.vo.Result;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  *
  * @author shenyw
  **/
+@ControllerAdvice
 public class BaseController {
 
     /**
@@ -16,8 +18,9 @@ public class BaseController {
      * @param e 异常类型
      * @return result
      */
-    @ExceptionHandler(RuntimeException.class)
-    public Result handleException(RuntimeException e) {
+    @ExceptionHandler(Exception.class)
+    public Result handleException(Exception e) {
+        // TODO 可以进行保存异常日志
         return Result.createError(e.getMessage());
     }
 
