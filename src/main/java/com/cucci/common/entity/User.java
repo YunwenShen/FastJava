@@ -1,8 +1,10 @@
 package com.cucci.common.entity;
 
-import com.cucci.common.base.BaseEntity;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
 
 /**
  * 用户
@@ -11,7 +13,10 @@ import lombok.Setter;
  **/
 @Getter
 @Setter
-public class User extends BaseEntity {
+public class User extends Model<User> {
+
+    private static final long serialVersionUID = -632208494633153724L;
+    private Long id;
 
     /**
      * 用户名
@@ -32,4 +37,9 @@ public class User extends BaseEntity {
      * 头像地址
      */
     private String headUrl;
+
+    @Override
+    protected Serializable pkVal() {
+        return id;
+    }
 }

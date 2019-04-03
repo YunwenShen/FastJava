@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 用户工具类
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 public class UserUtil {
 

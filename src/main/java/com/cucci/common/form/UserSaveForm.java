@@ -20,20 +20,26 @@ public class UserSaveForm implements SaveForm {
     /**
      * 用户名
      */
-    @NotBlank(message = "用户名不能为空")
+    @NotBlank(message = "用户名不能为空", groups = Add.class)
     private String name;
 
     /**
      * 年龄
      */
     @Max(value = 200, message = "年龄最大值不能超过200")
-    @Min(value = 18, message = "年龄最小值不能小于18")
+    @Min(value = 18, message = "年龄最小值不能小于18", groups = Update.class)
     private Integer age;
 
     /**
      * 地址
      */
-    @Size(max = 100, message = "地址长度100个字符")
-    @NotBlank(message = "地址不能为空")
+    @Size(max = 100, message = "地址长度100个字符", groups = {Add.class, Update.class})
+    @NotBlank(message = "地址不能为空", groups = Add.class)
     private String addr;
+
+    public interface Add {
+    }
+
+    public interface Update {
+    }
 }
