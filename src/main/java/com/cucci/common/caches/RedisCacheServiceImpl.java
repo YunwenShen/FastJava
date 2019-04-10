@@ -76,6 +76,20 @@ public class RedisCacheServiceImpl implements ICacheService {
         });
     }
 
+    @Override
+    public long sadd(String type, String key, Object object) {
+        return execute(jedis -> {
+            return jedis.sadd(generateKey(type, key), serializer.serialize(object));
+        });
+    }
+
+    @Override
+    public long srem(String type, String key, Object object) {
+        return execute(jedis -> {
+            return jedis.srem(generateKey(type, key), serializer.serialize(object));
+        });
+    }
+
     /**
      * 有返回结果的回调接口定义。
      */

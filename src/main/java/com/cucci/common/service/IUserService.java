@@ -15,4 +15,21 @@ public interface IUserService {
      * @return
      */
     Result save(UserSaveForm saveForm);
+
+    /**
+     * 保存新增用户，通知指定用户
+     *
+     * @param saveForm
+     * @param userId
+     * @return
+     */
+    Result inform(UserSaveForm saveForm, String userId);
+
+    /**
+     * 保存新增用户，通知所有人
+     *
+     * @param saveForm
+     * @return
+     */
+    Result broadcast(UserSaveForm saveForm);
 }
