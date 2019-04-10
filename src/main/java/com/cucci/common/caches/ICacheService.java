@@ -75,4 +75,23 @@ public interface ICacheService {
      */
     Long expire(final String type, final String key, final int seconds);
 
+    /**
+     * 添加集合的元素
+     *
+     * @param type
+     * @param key
+     * @param object
+     * @return
+     */
+    long sadd(String type, String key, Object object);
+
+    /**
+     * 删除集合元素
+     *
+     * @param type
+     * @param key
+     * @param object
+     * @return
+     */
+    long srem(String type, String key, Object object);
 }

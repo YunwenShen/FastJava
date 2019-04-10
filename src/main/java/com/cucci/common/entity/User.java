@@ -42,4 +42,15 @@ public class User extends Model<User> {
     protected Serializable pkVal() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", age=" + age +
+                ", headUrl='" + headUrl + '\'' +
+                '}';
+    }
 }
