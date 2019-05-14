@@ -1,6 +1,7 @@
 package com.cucci.common.service.impl;
 
 import com.cucci.common.annotions.DataSource;
+import com.cucci.common.dao.IFooDao;
 import com.cucci.common.service.IDynamicDataSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,16 +14,19 @@ public class DynamicDataSourceServiceImpl implements IDynamicDataSourceService {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
+    @Autowired
+    private IFooDao fooDao;
 
     @Override
     public Map<String, Object> query() {
-        return jdbcTemplate.queryForMap("select * from Users where id = 100000003");
+        System.out.println(fooDao.selectList(null).get(5));
+        return null;
     }
 
     @Override
     @DataSource("secondary")
     public Map<String, Object> queryBySecondary() {
-        return jdbcTemplate.queryForMap("select * from Users where id = 100000003");
+        System.out.println(fooDao.selectList(null).get(5));
+        return null;
     }
 }

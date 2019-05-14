@@ -1,8 +1,12 @@
 package com.cucci.common.config;
 
 
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
+import org.apache.ibatis.type.JdbcType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -26,6 +30,8 @@ public class DynamicDataSourceConfig {
     private String mapperLocations;
     @Value("${mybatis-plus.typeAliasesPackage}")
     private String typeAliasesPackage;
+    @Autowired
+    private PaginationInterceptor paginationInterceptor;
 
     /**
      * 默认数据源
@@ -74,12 +80,18 @@ public class DynamicDataSourceConfig {
      */
     @Bean
     public SqlSessionFactory sqlSessionFactory(DynamicDataSource ds) throws Exception {
-        SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
-        fb.setDataSource(ds);
-        // 下边两句仅仅用于*.xml文件，如果整个持久层操作不需要使用到xml文件的话（只用注解就可以搞定），则不加
-        fb.setTypeAliasesPackage(typeAliasesPackage);// 指定基包
-//        fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(mapperLocations));//
-        return fb.getObject();
+        MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
+        sqlSessionFactory.setDataSource(ds);
+        //sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/*/*Mapper.xml"));
+
+        MybatisConfiguration configuration = new MybatisConfiguration();
+        //configuration.setDefaultScriptingLanguage(MybatisXMLLanguageDriver.class);
+        configuration.setJdbcTypeForNull(JdbcType.NULL);
+        configuration.setMapUnderscoreToCamelCase(true);
+        configuration.setCacheEnabled(false);
+        sqlSessionFactory.setConfiguration(configuration);
+//
+        return sqlSessionFactory.getObject();
     }
 
     /**
