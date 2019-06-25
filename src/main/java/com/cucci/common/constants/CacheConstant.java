@@ -18,5 +18,5 @@ public final class CacheConstant {
     /**
      * 缓存类型和缓存key分隔符
      */
-    public static final String TYPE_KEY_SEPARATOR = "-";
+    public static final String TYPE_KEY_SEPARATOR = ":";
 }
