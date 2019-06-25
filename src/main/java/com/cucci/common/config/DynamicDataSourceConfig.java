@@ -2,11 +2,9 @@ package com.cucci.common.config;
 
 
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -30,8 +28,6 @@ public class DynamicDataSourceConfig {
     private String mapperLocations;
     @Value("${mybatis-plus.typeAliasesPackage}")
     private String typeAliasesPackage;
-    @Autowired
-    private PaginationInterceptor paginationInterceptor;
 
     /**
      * 默认数据源
@@ -82,15 +78,11 @@ public class DynamicDataSourceConfig {
     public SqlSessionFactory sqlSessionFactory(DynamicDataSource ds) throws Exception {
         MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(ds);
-        //sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/*/*Mapper.xml"));
-
         MybatisConfiguration configuration = new MybatisConfiguration();
-        //configuration.setDefaultScriptingLanguage(MybatisXMLLanguageDriver.class);
         configuration.setJdbcTypeForNull(JdbcType.NULL);
         configuration.setMapUnderscoreToCamelCase(true);
         configuration.setCacheEnabled(false);
         sqlSessionFactory.setConfiguration(configuration);
-//
         return sqlSessionFactory.getObject();
     }
 
