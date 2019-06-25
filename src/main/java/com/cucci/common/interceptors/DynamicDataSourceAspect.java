@@ -39,13 +39,17 @@ public class DynamicDataSourceAspect {
             }
 
             DynamicContextHolder.setDB(value);
-            log.debug("set datasource is {}", value);
+            if (log.isDebugEnabled()) {
+                log.debug("set datasource is {}", value);
+            }
         }
 
         try {
             return point.proceed();
         } finally {
-            log.debug("clean datasource");
+            if (log.isDebugEnabled()) {
+                log.debug("clean datasource");
+            }
         }
     }
 
