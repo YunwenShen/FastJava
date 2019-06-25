@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 测试WebSocket
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 @Api(value = "首页")
 @AllArgsConstructor

@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * webSocket
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 @Slf4j
 @Component

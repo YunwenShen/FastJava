@@ -7,7 +7,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 /**
  * WebSocket 配置
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 @Configuration
 public class WebSocketConfig {
