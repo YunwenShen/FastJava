@@ -53,6 +53,17 @@ public class DynamicDataSourceConfig {
     }
 
     /**
+     * 工作流的数据源
+     *
+     * @return
+     */
+    @ConfigurationProperties(prefix = "spring.datasource.activiti")
+    @Bean
+    public DataSource activiti() {
+        return DataSourceBuilder.create().build();
+    }
+
+    /**
      * 动态数据源
      *
      * @param primary
@@ -60,16 +71,18 @@ public class DynamicDataSourceConfig {
      * @return
      */
     @Bean
-    public DynamicDataSource initDynamicDataSource(@Qualifier("primary") DataSource primary, @Qualifier("secondary") DataSource secondary) {
+    public DynamicDataSource initDynamicDataSource(@Qualifier("primary") DataSource primary,
+                                                   @Qualifier("secondary") DataSource secondary,
+                                                   @Qualifier("activiti") DataSource activiti) {
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         dynamicDataSource.setDefaultTargetDataSource(primary);
         Map<Object, Object> targetDataSource = new HashMap<>();
         targetDataSource.put("primary", primary);
         targetDataSource.put("secondary", secondary);
+        targetDataSource.put("activiti", activiti);
         dynamicDataSource.setTargetDataSources(targetDataSource);
         return dynamicDataSource;
     }
-
 
     /**
      * 根据数据源创建SqlSessionFactory
