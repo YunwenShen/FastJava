@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://activiti.org/bpmn20" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1565321303875" name="" targetNamespace="http://activiti.org/bpmn20" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <process id="vacationRequest" isClosed="false" isExecutable="false" name="Vacation request" processType="None">
+    <startEvent activiti:initiator="employeeName" id="request">
+      <extensionElements>
+        <activiti:formProperty id="numberOfDays" name="Number of days" required="true" type="long"/>
+        <activiti:formProperty datePattern="dd-MM-yyyy hh:mm" id="startDate" name="First day of holiday (dd-MM-yyy)" required="true" type="date"/>
+        <activiti:formProperty id="vacationMotivation" name="Motivation" type="string"/>
+      </extensionElements>
+    </startEvent>
+    <sequenceFlow id="flow1" sourceRef="request" targetRef="handleRequest"/>
+    <userTask activiti:exclusive="true" id="handleRequest" name="Handle vacation request">
+      <documentation id="handleRequest_D_1"><![CDATA[${employeeName} would like to take ${numberOfDays} day(s) of vacation (Motivation: ${vacationMotivation}).]]></documentation>
+      <extensionElements>
+        <activiti:formProperty id="vacationApproved" name="Do you approve this vacation" required="true" type="enum">
+          <activiti:value id="true" name="Approve"/>
+          <activiti:value id="false" name="Reject"/>
+        </activiti:formProperty>
+        <activiti:formProperty id="managerMotivation" name="Motivation" type="string"/>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow2" sourceRef="handleRequest" targetRef="requestApprovedDecision"/>
+    <exclusiveGateway gatewayDirection="Unspecified" id="requestApprovedDecision" name="Request approved?"/>
+    <sequenceFlow id="flow3" sourceRef="requestApprovedDecision" targetRef="sendApprovalMail">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${vacationApproved == 'true'}]]></conditionExpression>
+    </sequenceFlow>
+    <manualTask activiti:exclusive="true" id="sendApprovalMail" name="Send confirmation e-mail"/>
+    <sequenceFlow id="flow4" sourceRef="sendApprovalMail" targetRef="theEnd1"/>
+    <endEvent id="theEnd1"/>
+    <sequenceFlow id="flow5" sourceRef="requestApprovedDecision" targetRef="adjustVacationRequestTask">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${vacationApproved == 'false'}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask activiti:exclusive="true" id="adjustVacationRequestTask" name="Adjust vacation request">
+      <documentation id="adjustVacationRequestTask_D_1"><![CDATA[Your manager has disapproved your vacation request for ${numberOfDays} days.
+        Reason: ${managerMotivation}]]></documentation>
+      <extensionElements>
+        <activiti:formProperty id="numberOfDays" name="Number of days" required="true" type="long"/>
+        <activiti:formProperty datePattern="dd-MM-yyyy hh:mm" id="startDate" name="First day of holiday (dd-MM-yyy)" required="true" type="date"/>
+        <activiti:formProperty id="vacationMotivation" name="Motivation" type="string"/>
+        <activiti:formProperty id="resendRequest" name="Resend vacation request to manager?" required="true" type="enum">
+          <activiti:value id="true" name="Yes"/>
+          <activiti:value id="false" name="No"/>
+        </activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-EDBF0CA0-237D-477B-8AF0-75D32815BBA8" sourceRef="adjustVacationRequestTask" targetRef="handleRequest"/>
+  </process>
+  <bpmndi:BPMNDiagram documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
+    <bpmndi:BPMNPlane bpmnElement="vacationRequest">
+      <bpmndi:BPMNShape bpmnElement="request" id="Shape-request">
+        <omgdc:Bounds height="32.0" width="32.0" x="20.0" y="185.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="handleRequest" id="Shape-handleRequest">
+        <omgdc:Bounds height="55.0" width="85.0" x="105.0" y="175.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="requestApprovedDecision" id="Shape-requestApprovedDecision" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="285.0" y="175.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sendApprovalMail" id="Shape-sendApprovalMail">
+        <omgdc:Bounds height="55.0" width="85.0" x="485.0" y="195.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="theEnd1" id="Shape-theEnd1">
+        <omgdc:Bounds height="32.0" width="32.0" x="625.0" y="195.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="adjustVacationRequestTask" id="Shape-adjustVacationRequestTask">
+        <omgdc:Bounds height="55.0" width="85.0" x="225.0" y="320.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1" sourceElement="request" targetElement="handleRequest">
+        <omgdi:waypoint x="52.0" y="201.0"/>
+        <omgdi:waypoint x="105.0" y="203.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2" sourceElement="handleRequest" targetElement="requestApprovedDecision">
+        <omgdi:waypoint x="190.0" y="203.0"/>
+        <omgdi:waypoint x="285.0" y="191.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3" sourceElement="requestApprovedDecision" targetElement="sendApprovalMail">
+        <omgdi:waypoint x="317.0" y="191.0"/>
+        <omgdi:waypoint x="485.0" y="223.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="3.0" width="0.0" x="0.0" y="-27.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4" sourceElement="sendApprovalMail" targetElement="theEnd1">
+        <omgdi:waypoint x="570.0" y="223.0"/>
+        <omgdi:waypoint x="625.0" y="211.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5" sourceElement="requestApprovedDecision" targetElement="adjustVacationRequestTask">
+        <omgdi:waypoint x="297.5" y="203.5"/>
+        <omgdi:waypoint x="297.5" y="320.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-EDBF0CA0-237D-477B-8AF0-75D32815BBA8" id="BPMNEdge_sid-EDBF0CA0-237D-477B-8AF0-75D32815BBA8" sourceElement="adjustVacationRequestTask" targetElement="handleRequest">
+        <omgdi:waypoint x="225.0" y="347.5"/>
+        <omgdi:waypoint x="190.0" y="203.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

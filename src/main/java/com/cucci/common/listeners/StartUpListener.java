@@ -2,11 +2,8 @@ package com.cucci.common.listeners;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.activiti.engine.delegate.DelegateTask;
-import org.activiti.engine.delegate.Expression;
-import org.activiti.engine.delegate.TaskListener;
-
-import java.io.Serializable;
+import org.activiti.engine.delegate.event.ActivitiEvent;
+import org.activiti.engine.delegate.event.ActivitiEventListener;
 
 /**
  * 请假流程开始
@@ -14,21 +11,16 @@ import java.io.Serializable;
  * @author shenyw@citycloud.com.cn
  **/
 @Slf4j
-public class StartUpListener implements TaskListener, Serializable {
+public class StartUpListener implements ActivitiEventListener {
 
-    private Expression expression;
 
-    public Expression getExpression() {
-        return expression;
-    }
+    @Override
+    public void onEvent(ActivitiEvent activitiEvent) {
 
-    public void setExpression(Expression expression) {
-        this.expression = expression;
     }
 
     @Override
-    public void notify(DelegateTask delegateTask) {
-        log.info("【请假申请流程开始了】");
-        log.info("输入的变量：" + expression.getValue(delegateTask));
+    public boolean isFailOnException() {
+        return false;
     }
 }
