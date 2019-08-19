@@ -1,14 +1,14 @@
 package com.cucci.common.enums;
 
 /**
- * 日志操作类型
+ * 操作模块
  *
- * @author shenyw
+ * @author shenyw@citycloud.com.cn
  **/
-public enum OperateType {
-    CREATE(1, "新增"),
-    UPDATE(2, "更新"),
-    DELETE(3, "删除");
+public enum ModuleType {
+
+    OA(1, "用户系统"),
+    SYS(2, "系统配置");
 
     private Integer key;
     private String value;
@@ -21,8 +21,9 @@ public enum OperateType {
         return value;
     }
 
-    OperateType(Integer key, String value) {
+    ModuleType(Integer key, String value) {
         this.key = key;
         this.value = value;
     }
+
 }
