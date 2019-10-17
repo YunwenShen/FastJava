@@ -4,7 +4,6 @@ import org.quartz.spi.JobFactory;
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.boot.autoconfigure.quartz.QuartzProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationContext;
@@ -40,7 +39,6 @@ public class QuartzConfig {
      */
     @Bean("quartzProperties")
     public Properties quartzProperties(QuartzProperties properties) {
-        PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
         Map<String, String> map = properties.getProperties();
         Properties p = new Properties();
         for (Map.Entry<String, String> entry : map.entrySet()) {
