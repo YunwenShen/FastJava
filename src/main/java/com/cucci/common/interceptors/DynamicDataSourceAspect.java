@@ -12,6 +12,11 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
+/**
+ * 多数据源切换
+ *
+ * @author shenyw
+ */
 @Aspect
 @Component
 @Log4j2
@@ -38,7 +43,7 @@ public class DynamicDataSourceAspect {
                 value = targetDataSource.value();
             }
 
-            DynamicContextHolder.setDB(value);
+            DynamicContextHolder.setDataSource(value);
             if (log.isDebugEnabled()) {
                 log.debug("set datasource is {}", value);
             }
@@ -47,9 +52,7 @@ public class DynamicDataSourceAspect {
         try {
             return point.proceed();
         } finally {
-            if (log.isDebugEnabled()) {
-                log.debug("clean datasource");
-            }
+            DynamicContextHolder.removeDataSource();
         }
     }
 

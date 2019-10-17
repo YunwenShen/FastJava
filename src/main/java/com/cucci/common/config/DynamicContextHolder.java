@@ -1,5 +1,10 @@
 package com.cucci.common.config;
 
+/**
+ * 多数据源上下文管理器
+ *
+ * @author shenyw
+ */
 public class DynamicContextHolder {
     private static final ThreadLocal<String> CONTEXT_HOLDER = new ThreadLocal<>();
 
@@ -8,7 +13,7 @@ public class DynamicContextHolder {
      *
      * @return 数据源名称
      */
-    public static String getDB() {
+    public static String getDataSource() {
         return CONTEXT_HOLDER.get();
     }
 
@@ -17,8 +22,15 @@ public class DynamicContextHolder {
      *
      * @param dataSource 数据源名称
      */
-    public static void setDB(String dataSource) {
+    public static void setDataSource(String dataSource) {
         CONTEXT_HOLDER.set(dataSource);
+    }
+
+    /**
+     * 清除多数据源的上下文
+     */
+    public static void removeDataSource() {
+        CONTEXT_HOLDER.remove();
     }
 
 }
