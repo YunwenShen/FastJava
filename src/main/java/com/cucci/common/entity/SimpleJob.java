@@ -4,12 +4,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.Date;
-import java.util.Map;
 
 /**
- * 简单任务
+ * 简单job
  *
- * @author shenyw
+ * @author shenyw@citycloud.com.cn
  **/
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -26,12 +25,8 @@ public class SimpleJob extends BaseJob {
     private Integer interval;
 
     /**
-     * 重复几次
+     * 是否重复
      */
-    private Integer repeat;
+    private boolean repeat;
 
-    /**
-     * 参数
-     */
-    private Map<String, Object> param;
 }

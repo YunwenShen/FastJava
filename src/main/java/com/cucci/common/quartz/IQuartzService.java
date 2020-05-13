@@ -1,57 +1,33 @@
 package com.cucci.common.quartz;
 
+
 import com.cucci.common.entity.BaseJob;
-import com.cucci.common.entity.Job;
+import com.cucci.common.entity.CronJob;
 import com.cucci.common.entity.SimpleJob;
+import org.quartz.SchedulerException;
 
 /**
- * 定时任务接口
+ * quartz
  *
- * @author shenyw
- */
+ * @author shenyw@citycloud.com.cn
+ **/
 public interface IQuartzService {
 
     /**
      * 添加任务
      *
      * @param job
+     * @throws SchedulerException
      */
-    void addJob(Job job);
+    void addJob(CronJob job) throws SchedulerException;
 
     /**
      * 添加简单任务
      *
      * @param job
+     * @throws SchedulerException
      */
-    void addSimpleJob(SimpleJob job);
-
-    /**
-     * 暂停任务
-     *
-     * @param job
-     */
-    void pauseJob(BaseJob job);
-
-    /**
-     * 恢复任务
-     *
-     * @param job
-     */
-    void resumeJob(BaseJob job);
-
-    /**
-     * 移除任务
-     *
-     * @param job
-     */
-    void removeJob(BaseJob job);
-
-    /**
-     * 触发任务
-     *
-     * @param job
-     */
-    void triggerJob(BaseJob job);
+    void addSimpleJob(SimpleJob job) throws SchedulerException;
 
     /**
      * 修改任务
@@ -59,27 +35,49 @@ public interface IQuartzService {
      * @param oldJob
      * @param newJob
      * @return
+     * @throws SchedulerException
      */
-    boolean modifyJob(Job oldJob, Job newJob);
+    void modifyJob(BaseJob oldJob, CronJob newJob) throws SchedulerException;
 
     /**
      * 修改简单任务
      *
      * @param oldJob
      * @param newJob
-     * @return
+     * @throws SchedulerException
      */
-    boolean modifySimpleJob(SimpleJob oldJob, SimpleJob newJob);
-
-
-    /**
-     * 开始任务
-     */
-    void startSchedule();
+    void modifySimpleJob(BaseJob oldJob, SimpleJob newJob) throws SchedulerException;
 
     /**
-     * 取消计划
+     * 暂停任务
+     *
+     * @param job
+     * @throws SchedulerException
      */
-    void shutdownSchedule();
+    void pauseJob(BaseJob job) throws SchedulerException;
+
+    /**
+     * 恢复任务
+     *
+     * @param job
+     * @throws SchedulerException
+     */
+    void resumeJob(BaseJob job) throws SchedulerException;
+
+    /**
+     * 移除任务
+     *
+     * @param job
+     * @throws SchedulerException
+     */
+    void removeJob(BaseJob job) throws SchedulerException;
+
+    /**
+     * 触发任务
+     *
+     * @param job
+     * @throws SchedulerException
+     */
+    void triggerJob(BaseJob job) throws SchedulerException;
 
 }

@@ -1,14 +1,16 @@
 package com.cucci.common.entity;
 
 import lombok.Data;
+import org.quartz.Job;
+import org.quartz.JobDataMap;
 
 /**
- * 定时任务Job基类
+ * quartz实体类
  *
- * @author shenyw
+ * @author shenyw@citycloud.com.cn
  **/
 @Data
-public abstract class BaseJob {
+public class BaseJob {
 
     /**
      * 任务 名称
@@ -33,6 +35,11 @@ public abstract class BaseJob {
     /**
      * 任务 关联的类
      */
-    private Class clazz;
+    private Class<? extends Job> clazz;
+
+    /**
+     * 参数
+     */
+    private JobDataMap param;
 
 }
