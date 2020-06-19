@@ -7,6 +7,8 @@ import java.lang.annotation.*;
 
 /**
  * 操作日志 注解
+ *
+ * @author shenyw
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
