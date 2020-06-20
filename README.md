@@ -5,3 +5,4 @@
 4. easy poi 集成
 5. 集成soul网关
 6. 动态多数据源
+7. 集成xxl-job
