@@ -3,7 +3,7 @@ package com.cucci.common.enums;
 /**
  * 操作模块
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 public enum ModuleType {
 

@@ -5,7 +5,7 @@ import reactor.core.publisher.Flux;
 /**
  * The Demo For Project Reactor
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 public class ReactorDemo {
 

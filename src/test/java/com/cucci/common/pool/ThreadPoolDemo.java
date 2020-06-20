@@ -8,7 +8,7 @@ import java.util.concurrent.*;
 /**
  * 线程池使用方式
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 public class ThreadPoolDemo {
 

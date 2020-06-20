@@ -46,7 +46,7 @@
         <logger name="org.springframework" level="INFO"/>
         <logger name="org.mybatis" level="INFO"/>
         <!-- 最低输出info级别信息 -->
-        <Root level="info">
+        <Root level="debug">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFileInfo"/>
             <AppenderRef ref="RollingFileError"/>

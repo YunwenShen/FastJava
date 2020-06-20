@@ -28,3 +28,7 @@
 /mvnw
 /lib/
 /logs/
+src/main/resources/fast-java-0.0.1-SNAPSHOT.jar
+src/test/java/com/cucci/common/caches/SuperClass.java
+src/test/java/com/cucci/comon/
+src/test/java/com/cucci/comon/resource/application-dev.properties

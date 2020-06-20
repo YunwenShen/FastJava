@@ -7,7 +7,7 @@ package com.cucci.common.exceptions;
  * 代码中能够察觉到的异常都应该转换成该异常，然后通过统一异常处理器进行处理
  * </>
  *
- * @author shenyw@citycloud.com.cn
+ * @author shenyw
  **/
 public class ApplicationException extends RuntimeException {
 

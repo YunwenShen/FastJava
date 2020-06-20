@@ -124,6 +124,13 @@
             <version>3.2.10.RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <!-- file storage start  -->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>3.8.0</version>
+        </dependency>
+        <!-- file storage end  -->
     </dependencies>
 
     <build>
