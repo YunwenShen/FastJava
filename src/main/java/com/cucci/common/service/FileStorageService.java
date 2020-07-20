@@ -2,8 +2,6 @@ package com.cucci.common.service;
 
 import com.cucci.common.vo.FileStorageEntity;
 
-import java.io.IOException;
-
 /**
  * 文件存储服务
  *
@@ -20,7 +18,7 @@ public interface FileStorageService {
      * @param entity
      * @return url链接
      */
-    String save(FileStorageEntity entity) throws IOException, Exception;
+    String save(FileStorageEntity entity) throws Exception;
 
     /**
      * 删除文件

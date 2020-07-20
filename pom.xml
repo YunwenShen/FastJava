@@ -130,6 +130,16 @@
             <artifactId>aliyun-sdk-oss</artifactId>
             <version>3.8.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.csource</groupId>
+            <artifactId>fastdfs-client-java</artifactId>
+            <version>1.30</version>
+        </dependency>
+        <dependency>
+            <groupId>net.anumbrella.seaweedfs</groupId>
+            <artifactId>seaweedfs-java-client</artifactId>
+            <version>0.0.3.RELEASE</version>
+        </dependency>
         <!-- file storage end  -->
     </dependencies>
 
