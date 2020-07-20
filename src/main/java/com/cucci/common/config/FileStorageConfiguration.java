@@ -36,7 +36,7 @@ public class FileStorageConfiguration {
     @ConditionalOnBean(OssProperties.class)
     @Bean
     public OSSClient initOSSClient(OssProperties ossProperties) {
-        log.debug("正在初始化oss");
+        log.info("正在初始化oss");
         ClientConfiguration conf = new ClientConfiguration();
         List<String> cnameExcludeList = new ArrayList<>();
         String excludeItem = ossProperties.getServer();
@@ -44,14 +44,14 @@ public class FileStorageConfiguration {
         conf.setCnameExcludeList(cnameExcludeList);
         CredentialsProvider credentials = new DefaultCredentialProvider(ossProperties.getAccessKey(), ossProperties.getAccessSecret());
         OSSClient ossClient = new OSSClient(ossProperties.getServer(), credentials, conf);
-        log.debug("oss初始化成功");
+        log.info("oss初始化成功");
         return ossClient;
     }
 
     @ConditionalOnBean(FastdfsProperties.class)
     @Bean
     public StorageClient initFastdfs(FastdfsProperties fastdfsProperties) {
-        log.debug("fastdfs正在初始化");
+        log.info("fastdfs正在初始化");
         Properties properties = new Properties();
         properties.setProperty("fastdfs.tracker_servers", fastdfsProperties.getTrackerServers());
         properties.setProperty("fastdfs.connect_timeout_in_seconds", String.valueOf(fastdfsProperties.getConnectTimeoutInSeconds()));
@@ -65,7 +65,7 @@ public class FileStorageConfiguration {
             TrackerServer server = Objects.requireNonNull(client.getTrackerServer());
             StorageServer storageServer = Objects.requireNonNull(client.getStoreStorage(server));
             StorageClient storageClient = new StorageClient(server, storageServer);
-            log.debug("fastdfs初始化成功");
+            log.info("fastdfs初始化成功");
             return storageClient;
         } catch (Exception e) {
             log.error("fastdfs初始化失败", e);
@@ -76,7 +76,7 @@ public class FileStorageConfiguration {
     @ConditionalOnBean(SeaweedFsProperties.class)
     @Bean
     public FileTemplate initFileTemplate(SeaweedFsProperties seaweedFsProperties) {
-        log.debug("正在初始化seaweedfs客户端");
+        log.info("正在初始化seaweedfs客户端");
         FileSource fileSource = new FileSource();
         ConnectionProperties connectionProperties = new ConnectionProperties.Builder()
                 .host(seaweedFsProperties.getHost())
@@ -85,7 +85,7 @@ public class FileStorageConfiguration {
         fileSource.setProperties(connectionProperties);
         fileSource.startup();
         FileTemplate fileTemplate = new FileTemplate(fileSource.getConnection());
-        log.debug("seaweedfs初始化成功");
+        log.info("seaweedfs初始化成功");
         return fileTemplate;
     }
 }

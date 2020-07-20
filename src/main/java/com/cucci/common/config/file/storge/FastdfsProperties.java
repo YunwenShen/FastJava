@@ -2,6 +2,7 @@ package com.cucci.common.config.file.storge;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 @ApiModel("fastdfs配置")
 @Component
 @ConfigurationProperties(prefix = "file.storage.fastdfs")
+@ConditionalOnProperty(value = "file.storage.strategy", havingValue = "fastdfs")
 public class FastdfsProperties {
 
     private String trackerServers;
